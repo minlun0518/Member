@@ -37,8 +37,11 @@ public class GenderActivity extends AppCompatActivity {
                     pref.edit()
                             .putString("edGender", useGender)
                             .commit();
-                    setResult(RESULT_OK);
                     finish();
+
+                    //Intent intent =new Intent(GenderActivity.this,MainActivity.class);
+                    //intent.putExtra()
+                    //startActivity(intent);
                 }
                 else {
                     Toast.makeText(GenderActivity.this, "請輸性別", Toast.LENGTH_LONG).show();

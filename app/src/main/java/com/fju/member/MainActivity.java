@@ -9,11 +9,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    private static final int REQUEST_CODE_COMPLEMENT=21;
+    private static final int REQUEST_CODE_NICKNAME=21;
     boolean showNikename =false;
-    private TextView name;
-    private TextView age;
-    private TextView gender;
+    public TextView name;
+    public TextView age;
+    public TextView gender;
+    private NicknameActivity nicknameActivity;
+    private  AgeActivity ageActivity;
+    private  GenderActivity genderActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,17 +25,35 @@ public class MainActivity extends AppCompatActivity {
 
         if (!showNikename) {
             Intent nickname = new Intent(this, NicknameActivity.class);
-            //startActivityForResult(nickname,REQUEST_CODE_COMPLEMENT);
-            startActivity(nickname);
+            startActivityForResult(nickname,REQUEST_CODE_NICKNAME);
+            //startActivity(nickname);
         }
 
-        findViews();
+
     }
-/*
+
+    public void findViews() {
+        name = findViewById(R.id.nameTextView);
+        age = findViewById(R.id.ageTextView);
+        gender = findViewById(R.id.genderEd);
+
+        String usename = nicknameActivity.getSharedPreferences("nickname", MODE_PRIVATE)
+                .getString("edName", "");
+        name.setText(usename);
+
+        String userage = ageActivity.getSharedPreferences("AGE", MODE_PRIVATE)
+                .getString("edAge", "");
+        age.setText(userage);
+        String usergender = genderActivity.getSharedPreferences("GENDER", MODE_PRIVATE)
+                .getString("edGender", "");
+        gender.setText(usergender);
+
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
-        if(requestCode == REQUEST_CODE_COMPLEMENT){
+        if(requestCode == REQUEST_CODE_NICKNAME){
             if(resultCode != RESULT_OK){
                 Toast.makeText(this,"再見",Toast.LENGTH_LONG).show();
                 finish();
@@ -43,22 +64,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
- */
 
-    private void findViews() {
-        name = findViewById(R.id.nameTextView);
-        age = findViewById(R.id.ageTextView);
-        gender = findViewById(R.id.genderEd);
 
-        String usename = getSharedPreferences("nickname", MODE_PRIVATE)
-                .getString("USER", "");
-        name.setText(usename);
-        String userage = getSharedPreferences("age", MODE_PRIVATE)
-                .getString("AGE", "");
-        age.setText(userage);
-        String usergender = getSharedPreferences("gender", MODE_PRIVATE)
-                .getString("GENDER", "");
-        gender.setText(usergender);
-
-    }
 }
