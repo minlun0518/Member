@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         if (!showNikename) {
             Intent nickname = new Intent(this, NicknameActivity.class);
             startActivityForResult(nickname,REQUEST_CODE_LOGIN);
@@ -39,7 +41,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void findViews() {
+        TextView name =findViewById(R.id.nameTextView);
+        TextView age =findViewById(R.id.ageTextView);
+        TextView gender =findViewById(R.id.genderEd);
 
+        //String username = edUser.getText().toString();
+
+        getSharedPreferences("member",MODE_PRIVATE);
+        //SharedPreferences pref = getSharedPreferences("example", MODE_PRIVATE);
+        String userid = getSharedPreferences("example", MODE_PRIVATE)
+                .getString("name", "");
 
     }
 }

@@ -4,8 +4,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,14 @@ public class AgeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_age);
+
+        EditText edAge=findViewById(R.id.ageEt);
+        String userage = edAge.getText().toString();
+        SharedPreferences pref = getSharedPreferences("nickname", MODE_PRIVATE);
+        pref.edit()
+                .putString(userage, "age")
+                .commit();
+
         if (!showGender) {
             Intent goGender = new Intent(this, NicknameActivity.class);
             startActivityForResult(goGender,REQUEST_CODE_LOGIN);

@@ -7,7 +7,7 @@
     tools:context=".GenderActivity">
 
     <EditText
-        android:id="@+id/genderEt"
+        android:id="@+id/genderEd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -22,8 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        app:layout_constraintStart_toEndOf="@+id/genderEt"
-        app:layout_constraintTop_toBottomOf="@+id/genderEt"
+        app:layout_constraintStart_toEndOf="@+id/genderEd"
+        app:layout_constraintTop_toBottomOf="@+id/genderEd"
         app:srcCompat="@drawable/done" />
 
     <TextView
