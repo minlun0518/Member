@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 public class AgeActivity extends AppCompatActivity {
+    private static final String TAG = AgeActivity.class.getSimpleName();
     private static final int REQUEST_CODE_GENDER=21;
     boolean showGender =false;
     private EditText edAge;
@@ -26,27 +28,36 @@ public class AgeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_age);
 
-        edAge = findViewById(R.id.ageEt);
-        userage = edAge.getText().toString();
-
         ImageView rightGo = findViewById(R.id.neaxGoGender);
         rightGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                edAge = findViewById(R.id.ageEt);
+                userage = edAge.getText().toString();
+
                 if (!TextUtils.isEmpty(edAge.getText().toString())) {
-                    //setResult(RESULT_OK);
-                    SharedPreferences agepref = getSharedPreferences("AGE", MODE_PRIVATE);
-                    agepref.edit()
-                            .putString("edAge", userage)
-                            .commit();
-                    Intent goGender = new Intent(AgeActivity.this, GenderActivity.class);
-                    startActivityForResult(goGender,REQUEST_CODE_GENDER);
+                    setResult(RESULT_OK);
+                    next();
+
                     //finish();
                 } else {
                     Toast.makeText(AgeActivity.this, "請輸年齡", Toast.LENGTH_LONG).show();
                 }
             }
         });
+    }
+
+    private void next() {
+
+        SharedPreferences pref = getSharedPreferences("AGE", MODE_PRIVATE);
+        pref.edit()
+                .putString("edAge", userage)
+                .apply();
+        Log.d(TAG,"PREF"+userage);
+
+        Intent goGender = new Intent(this, GenderActivity.class);
+        startActivityForResult(goGender,REQUEST_CODE_GENDER);
+        Log.d(TAG,"goGender");
     }
 
     @Override
@@ -59,6 +70,7 @@ public class AgeActivity extends AppCompatActivity {
             } else {
                 showGender = true;
                 setResult(RESULT_OK);
+                Log.d(TAG,"setResult");
                 finish();
             }
         }
