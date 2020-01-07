@@ -11,9 +11,6 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_LOGIN=21;
     boolean showNikename =false;
-    //boolean showAge =false;
-    //boolean showGender =false;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +44,10 @@ public class MainActivity extends AppCompatActivity {
 
         //String username = edUser.getText().toString();
 
-        getSharedPreferences("member",MODE_PRIVATE);
+        //getSharedPreferences("member",MODE_PRIVATE);
         //SharedPreferences pref = getSharedPreferences("example", MODE_PRIVATE);
         String userid = getSharedPreferences("example", MODE_PRIVATE)
-                .getString("name", "");
+                .getString("nickname", "");
 
     }
 }
