@@ -12,28 +12,38 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class GenderActivity extends AppCompatActivity {
+
+    private EditText edGender;
+    private String useGender;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gender);
 
-        final EditText edGender=findViewById(R.id.genderEd);
-        String useGender = edGender.getText().toString();
-        SharedPreferences pref = getSharedPreferences("gender", MODE_PRIVATE);
-        pref.edit()
-                .putString(useGender, "gender")
-                .commit();
+        edGender = findViewById(R.id.genderEd);
+        useGender = edGender.getText().toString();
 
-        findViewById(R.id.doneGo).setOnClickListener(new View.OnClickListener() {
+        ImageView doneGo=findViewById(R.id.doneGo);
+        doneGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(edGender.getText().toString())) {
                     setResult(RESULT_OK);
+                    SharedPreferences pref = getSharedPreferences("GENDER", MODE_PRIVATE);
+                    pref.edit()
+                            .putString("edGender", useGender)
+                            .commit();
+                    setResult(RESULT_OK);
                     finish();
                 }
+                else {
+                    Toast.makeText(GenderActivity.this, "請輸性別", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
     }

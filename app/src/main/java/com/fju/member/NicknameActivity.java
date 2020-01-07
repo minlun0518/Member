@@ -11,62 +11,62 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class NicknameActivity extends AppCompatActivity {
-    private static final int REQUEST_CODE_LOGIN = 21;
-    boolean showAge = false;
+    private static final int REQUEST_CODE_NICKNAME = 21;
+    //boolean showAge = false;
+    private EditText edName;
+    private String username;
+ //   private TextView user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nickname);
-        final EditText edName=findViewById(R.id.nicknameEt);
-        String username = edName.getText().toString();
-        SharedPreferences pref = getSharedPreferences("nickname", MODE_PRIVATE);
-        pref.edit()
-                .putString(username, "nickname")
-                .commit();
+   //     user = findViewById(R.id.nameTextView);
+        edName = findViewById(R.id.nicknameEt);
+        username = edName.getText().toString();
 
-
-        findViewById(R.id.doneGo).setOnClickListener(new View.OnClickListener() {
+        ImageView rightGo=findViewById(R.id.nextGoAge);
+        rightGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!TextUtils.isEmpty(edName.getText().toString())) {
-                    setResult(RESULT_OK);
-
+                    SharedPreferences pref = getSharedPreferences("nickname", MODE_PRIVATE);
+                    pref.edit()
+                            .putString("edName", username)
+                            .commit();
+                    Intent goAge = new Intent(NicknameActivity.this, AgeActivity.class);
+                    startActivity(goAge);
+                    finish();
+                }
+                else {
+                    Toast.makeText(NicknameActivity.this, "請輸入姓名", Toast.LENGTH_LONG).show();
                 }
             }
         });
-        if (!showAge) {
-            //如果不是登入狀態就呼叫login intent
-            Intent goAge = new Intent(this, NicknameActivity.class);
-            startActivityForResult(goAge, REQUEST_CODE_LOGIN);
-        }
     }
 
-    @Override
-    //防止按返回
+/*
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 
-
-
-        if (requestCode == REQUEST_CODE_LOGIN) {
+        if (requestCode == REQUEST_CODE_NICKNAME) {
             if (resultCode != RESULT_OK) {
                 Toast.makeText(this, "請輸入年齡", Toast.LENGTH_LONG).show();
 
             } else {
-                showAge = true;
+                //showAge = true;
                 finish();
             }
         }
     }
 
     public void nickname(View view){
-        EditText nicknameEd = findViewById(R.id.nicknameEt);
-        String username = nicknameEd.getText().toString();
-
-
 
     }
+
+ */
 }
