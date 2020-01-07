@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }else {
                 setValue();
-                Log.d(TAG,"setvalue");
+                Log.d(TAG,"setValue");
             }
         }
     }

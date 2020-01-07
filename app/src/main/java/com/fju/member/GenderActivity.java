@@ -31,25 +31,25 @@ public class GenderActivity extends AppCompatActivity {
             public void onClick(View v) {
                 edGender = findViewById(R.id.genderEd);
                 useGender = edGender.getText().toString();
-                check();
+                if (!TextUtils.isEmpty(edGender.getText().toString())) {
+                    setResult(RESULT_OK);
+                    Log.d(TAG,"setResult");
+                    check();
+                }
+                else {
+                    Toast.makeText(GenderActivity.this, "請輸性別", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
 
-    public void check(){
-        if (!TextUtils.isEmpty(edGender.getText().toString())) {
-            setResult(RESULT_OK);
-            Log.d(TAG,"setResult");
+    private void check(){
             SharedPreferences pref = getSharedPreferences("GENDER", MODE_PRIVATE);
             pref.edit()
                     .putString("edGender", useGender)
                     .apply();
-            Log.d(TAG,"PREF");
+            Log.d(TAG,"pref.edit().putString:");
             finish();
-            Log.d(TAG,"finish");
-        }
-        else {
-            Toast.makeText(GenderActivity.this, "請輸性別", Toast.LENGTH_LONG).show()
-        }
+            Log.d(TAG,"GENDER finish");
     }
 }

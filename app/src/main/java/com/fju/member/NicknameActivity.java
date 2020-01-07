@@ -57,7 +57,7 @@ public class NicknameActivity extends AppCompatActivity {
         }
     }
 
-    public void next(){
+    private void next(){
         SharedPreferences pref = getSharedPreferences("nickname", MODE_PRIVATE);
         pref.edit()
                 .putString("edName", username)
