@@ -29,25 +29,9 @@ public class GenderActivity extends AppCompatActivity {
         doneGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 edGender = findViewById(R.id.genderEd);
                 useGender = edGender.getText().toString();
-
-               /* if (!TextUtils.isEmpty(edGender.getText().toString())) {
-                    setResult(RESULT_OK);
-                    SharedPreferences pref = getSharedPreferences("GENDER", MODE_PRIVATE);
-                    pref.edit()
-                            .putString("edGender", useGender)
-                            .commit();
-                    finish();
-                }
-                else {
-                    Toast.makeText(GenderActivity.this, "請輸性別", Toast.LENGTH_LONG).show();
-                }
-
-                */
-               check();
-
+                check();
             }
         });
     }
@@ -63,6 +47,9 @@ public class GenderActivity extends AppCompatActivity {
             Log.d(TAG,"PREF");
             finish();
             Log.d(TAG,"finish");
+        }
+        else {
+            Toast.makeText(GenderActivity.this, "請輸性別", Toast.LENGTH_LONG).show()
         }
     }
 }
